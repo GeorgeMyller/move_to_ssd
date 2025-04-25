@@ -13,32 +13,39 @@ header {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
+/* Ajuste no tamanho das fontes */
+body {
+    font-size: 18px; /* Aumenta o tamanho padrão da fonte */
+    line-height: 1.6; /* Melhora a legibilidade */
+}
 h1 {
-    font-size: 3em;
-    margin-bottom: 8px;
-    letter-spacing: 2px;
-    font-weight: 700;
+    font-size: 2.5em;
+}
+h2 {
+    font-size: 2em;
+}
+h3 {
+    font-size: 1.5em;
+}
+p, li {
+    font-size: 1.2em;
 }
 
 header p {
-    font-size: 1.2em;
     color: #ffe3f3;
     margin: 0 auto;
     max-width: 600px;
 }
 
-.button {
-    background: linear-gradient(90deg, #2196F3 0%, #FFB347 100%);
-    color: #232526;
-    padding: 14px 32px;
-    text-decoration: none;
-    border-radius: 30px;
-    display: inline-block;
-    font-weight: bold;
-    font-size: 1.1em;
-    margin-top: 24px;
-    box-shadow: 0 2px 8px rgba(255,105,180,0.2);
-    transition: background 0.2s, transform 0.2s;
+/* Adiciona animações com a biblioteca AOS (Animate On Scroll) */
+
+/* Importa o CSS da biblioteca AOS */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css');
+
+/* Configurações gerais para animações */
+[data-aos] {
+    opacity: 0;
+    transition-property: transform, opacity;
 }
 
 /* Ajusta o estilo de elementos animados */
@@ -48,24 +55,44 @@ header p {
 
 /* Adiciona animações específicas para seções */
 #hero {
-    padding: 60px 20px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    position: relative;
+    padding: 60px 20px;
     background: rgba(0, 0, 0, 0.5);
+    min-height: 50vh; /* Garante que ocupa pelo menos metade da altura da tela */
 }
 #hero h2 {
-    font-size: 2.2em;
     margin-bottom: 10px;
     animation: fadeIn 1.5s ease-in-out;
 }
 
-/* Adiciona animações para botões */
+/* Estilo para os botões "Ver no GitHub" */
 .button {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #2196F3, #FFB347);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Links de troca de idioma com animação de cor */
@@ -95,23 +122,16 @@ header p {
     margin-bottom: 0;
     position: relative;
 }
-.feature svg {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 12px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.feature svg, .step svg {
+    margin: 0 auto;
 }
 .feature h3 {
     margin-top: 0;
     margin-bottom: 8px;
-    font-size: 1.2em;
     color: #2196F3;
 }
 .feature p {
     color: #f5f5f5;
-    font-size: 1em;
 }
 
 #how-it-works {
@@ -150,7 +170,6 @@ header p {
     color: #FFB347;
     margin-top: 0;
     margin-bottom: 8px;
-    font-size: 1.1em;
 }
 
 #recomendacoes, #about {
@@ -169,13 +188,11 @@ header p {
     padding: 12px 18px;
     border-radius: 10px;
     color: #ffe3f3;
-    font-size: 1em;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 
 #about p {
     color: #ffe3f3;
-    font-size: 1.1em;
 }
 
 footer {
@@ -203,4 +220,22 @@ footer {
 }
 .lang-en .lang-pt {
     display: none;
+}
+
+/* Ajuste para espaçamento entre seções */
+section {
+    margin-bottom: 40px;
+}
+
+/* Ajuste para responsividade em telas menores */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.5em;
+    }
+    #hero h2 {
+        font-size: 1.8em;
+    }
+    .feature, .step {
+        padding: 20px;
+    }
 }
