@@ -27,18 +27,15 @@ header p {
     max-width: 600px;
 }
 
-.button {
-    background: linear-gradient(90deg, #2196F3 0%, #FFB347 100%);
-    color: #232526;
-    padding: 14px 32px;
-    text-decoration: none;
-    border-radius: 30px;
-    display: inline-block;
-    font-weight: bold;
-    font-size: 1.1em;
-    margin-top: 24px;
-    box-shadow: 0 2px 8px rgba(255,105,180,0.2);
-    transition: background 0.2s, transform 0.2s;
+/* Adiciona animações com a biblioteca AOS (Animate On Scroll) */
+
+/* Importa o CSS da biblioteca AOS */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css');
+
+/* Configurações gerais para animações */
+[data-aos] {
+    opacity: 0;
+    transition-property: transform, opacity;
 }
 
 /* Ajusta o estilo de elementos animados */

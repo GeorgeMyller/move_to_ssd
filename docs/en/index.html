@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>move_to_ssd - Migrate your data to an External SSD</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <!-- Adiciona o script da biblioteca AOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000, // Duração da animação em milissegundos
+                once: true // Executa a animação apenas uma vez
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html">PT</a>
+            <a href="index.html" class="active">EN</a>
+        </div>
+        <h1>Move_To_SSD</h1>
+        <p>Python script to migrate folders and apps from macOS to an external SSD with automatic symlinks.</p>
+    </header>
+
+    <section id="hero" data-aos="fade-up">
+        <img class="hero-img" src="data:image/svg+xml;utf8,<svg width='220' height='120' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='30' width='120' height='70' rx='12' fill='%23232526' stroke='%232196F3' stroke-width='3'/><rect x='150' y='60' width='60' height='30' rx='8' fill='%23FFB347' stroke='%232196F3' stroke-width='2'/><rect x='170' y='80' width='20' height='10' rx='2' fill='%23fff' stroke='%232196F3' stroke-width='1'/><circle cx='40' cy='65' r='6' fill='%232196F3'/><rect x='30' y='40' width='80' height='40' rx='8' fill='none' stroke='%23fff' stroke-width='1.5'/><path d='M130 65 Q140 70 150 75' stroke='%232196F3' stroke-width='3' fill='none' marker-end='url(%23arrowhead)'/><defs><marker id='arrowhead' markerWidth='6' markerHeight='6' refX='5' refY='3' orient='auto'><polygon points='0 0, 6 3, 0 6' fill='%232196F3'/></marker></defs></svg>" alt="Mac connected to external SSD" />
+        <h2>Free Up Space. Gain Speed.</h2>
+        <p>Automate the transfer of files, folders, and apps from your Mac to an external SSD safely and transparently.</p>
+        <a href="https://github.com/GeorgeMyller/move_to_ssd.git" class="button" target="_blank">View on GitHub</a>
+    </section>
+
+    <section id="features" data-aos="fade-right">
+        <h2>Features</h2>
+        <div class="feature">
+            <svg viewBox="0 0 48 48"><rect x="6" y="12" width="36" height="24" rx="6" fill="#FFB347" stroke="#2196F3" stroke-width="2"/><path d="M12 20h24M12 28h24" stroke="#232526" stroke-width="2"/></svg>
+            <h3>Smart Transfer</h3>
+            <p>Move user folders, apps, caches, and other large files to the external SSD.</p>
+        </div>
+        <div class="feature">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="#2196F3"/><path d="M16 24l6 6 10-10" stroke="#fff" stroke-width="3" fill="none"/></svg>
+            <h3>Automatic Symlinks</h3>
+            <p>Creates symlinks at the original locations, keeping everything transparent for the system and apps.</p>
+        </div>
+        <div class="feature">
+            <svg viewBox="0 0 48 48"><rect x="10" y="10" width="28" height="28" rx="6" fill="#232526" stroke="#FFB347" stroke-width="2"/><path d="M16 24h16M24 16v16" stroke="#2196F3" stroke-width="2"/></svg>
+            <h3>Detailed Report</h3>
+            <p>Shows a summary of successes, failures, and skipped items at the end.</p>
+        </div>
+        <div class="feature">
+            <svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="8" fill="#2196F3"/><path d="M16 32V16h16v16z" fill="#FFB347"/></svg>
+            <h3>Customizable Setup</h3>
+            <p>Choose which folders, apps, and files to migrate by editing the script.</p>
+        </div>
+    </section>
+
+    <section id="how-it-works" data-aos="fade-left">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="8" fill="#FFB347"/><path d="M16 24h16" stroke="#2196F3" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg>
+                <h3>1. Configure</h3>
+                <p>Edit <code>ssd_transfer.py</code> to set your SSD name and the folders/apps to migrate.</p>
+            </div>
+            <div class="step">
+                <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#2196F3"/><path d="M24 16v8l6 6" stroke="#fff" stroke-width="2" fill="none"/></svg>
+                <h3>2. Run</h3>
+                <p>Run the script in Terminal:<br><code>python3 ssd_transfer.py</code></p>
+            </div>
+            <div class="step">
+                <svg viewBox="0 0 48 48"><rect x="10" y="10" width="28" height="28" rx="6" fill="#232526" stroke="#FFB347" stroke-width="2"/><path d="M16 24h16M24 16v16" stroke="#2196F3" stroke-width="2"/></svg>
+                <h3>3. Confirm</h3>
+                <p>Check the summary and confirm to start the migration.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="recomendacoes" data-aos="zoom-in">
+        <h2>Recommendations</h2>
+        <ul>
+            <li>Back up important data before migrating.</li>
+            <li>Close apps that may be using files to be moved.</li>
+            <li>To move apps, run with <code>sudo</code>.</li>
+        </ul>
+    </section>
+
+    <section id="about" data-aos="fade-up">
+        <h2>About the Project</h2>
+        <p>Developed by George Souza. Open source under the MIT license.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 George Souza - move_to_ssd</p>
+    </footer>
+</body>
+</html>

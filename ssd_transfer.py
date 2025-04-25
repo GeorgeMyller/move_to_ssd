@@ -1,7 +1,27 @@
-\
 import os
 import shutil
 import sys
+import argparse
+import logging
+
+# --- Command-line arguments ---
+parser = argparse.ArgumentParser(description='Move items to SSD externo com symlinks.')
+parser.add_argument('--dry-run', action='store_true', help='Simula operações sem alterar arquivos.')
+parser.add_argument('--log-file', type=str, help='Arquivo para gravar logs.')
+parser.add_argument('--undo', action='store_true', help='Reverte operações anteriores (experimental).')
+args = parser.parse_args()
+
+# Configura logger
+if args.log_file:
+    logging.basicConfig(filename=args.log_file, level=logging.INFO, format='%(asctime)s %(message)s')
+else:
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+dry_run = args.dry_run
+
+if args.undo:
+    print('Função de undo experimental. Implementação pendente.')
+    sys.exit(0)
 
 # --- Configuration ---
 # !!! IMPORTANT: Replace "SEU_SSD" with the actual name of your SSD volume !!!
@@ -90,12 +110,17 @@ def ensure_dir_exists(path):
 
 def transfer_and_link_item(item_name, source_path, destination_path, destination_base_dir):
     """Moves an item (file or directory) and creates a symbolic link."""
-    print(f"\\n--- Processing: {item_name} ---")
-    print(f"Source: {source_path}")
-    print(f"Destination: {destination_path}")
+    logging.info(f"--- Processing: {item_name} ---")
+    logging.info(f"Source: {source_path}")
+    logging.info(f"Destination: {destination_path}")
 
     # 0. Ensure destination base directory exists
     ensure_dir_exists(destination_base_dir)
+
+    # 1. Skip if dry-run
+    if dry_run:
+        logging.info(f"DRY-RUN: would move {item_name} from {source_path} to {destination_path} and create symlink.")
+        return 'skipped'
 
     # 1. Check if source exists and is not a symlink
     if os.path.islink(source_path):
@@ -122,21 +147,21 @@ def transfer_and_link_item(item_name, source_path, destination_path, destination
 
     # 3. Move the item
     try:
-        print(f"Moving {source_path} to {destination_path}...")
+        logging.info(f"Moving {source_path} to {destination_path}...")
         shutil.move(source_path, destination_path)
-        print("Move successful.")
+        logging.info("Move successful.")
     except Exception as e:
-        print(f"Error moving {item_name}: {e}")
-        return "failed" # Indicate failure
+        logging.error(f"Error moving {item_name}: {e}")
+        return 'failed'
 
     # 4. Create the symbolic link
     try:
-        print(f"Creating symbolic link from {destination_path} to {source_path}...")
-        os.symlink(destination_path, source_path, target_is_directory=os.path.isdir(destination_path)) # Be explicit about target type
-        print("Symbolic link created successfully.")
-        return "success" # Indicate success
+        logging.info(f"Creating symbolic link from {destination_path} to {source_path}...")
+        os.symlink(destination_path, source_path, target_is_directory=os.path.isdir(destination_path))
+        logging.info("Symbolic link created successfully.")
+        return 'success'
     except Exception as e:
-        print(f"Error creating symbolic link for {item_name}: {e}")
+        logging.error(f"Error creating symbolic link for {item_name}: {e}")
         print("Attempting to restore original item...")
         try:
             # Ensure the source path doesn't exist before restoring
@@ -150,7 +175,7 @@ def transfer_and_link_item(item_name, source_path, destination_path, destination
             print(f"CRITICAL ERROR: Could not restore {item_name}: {restore_e}")
             print(f"Your {item_name} is now at: {destination_path}")
             print(f"The original path {source_path} might be empty or contain an incomplete link.")
-        return "failed" # Indicate failure
+        return 'failed'
 
 
 def run_transfers():
